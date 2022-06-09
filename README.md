@@ -12,6 +12,15 @@ The Strava dataset was provided the Urban Big Data Centre (UBDC) at the Universi
 * https://dataandcrowd.github.io/RGSBlog/commute17.html
 * https://dataandcrowd.github.io/RGSBlog/commute19.html
 
+## Trends in Active Commute over Time
+| Year | Total Active Commute |
+|------|----------------------|
+| 2015 | 254                  |
+| 2016 | 2107                 |
+| 2017 | 1763                 |
+| 2018 | 1884                 |
+| 2019 | 5590                 |
+
 ## License
 Due to Strava Metro's license, I am not able to share the data online. However, I will share my R codes on the repo. 
 
