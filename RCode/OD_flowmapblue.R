@@ -1,10 +1,8 @@
 mapboxAccessToken <- 'get your own mapbox tocken'
 
 library(tidyverse)
-library(flowmapblue)
-library(googlesheets4)
 library(data.table)
-library(sf)
+library(flowmapblue)
 
 ##########
 ##-2015-##
