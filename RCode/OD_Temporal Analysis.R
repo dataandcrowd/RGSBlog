@@ -2,14 +2,6 @@ library(tidyverse)
 library(lubridate)
 library(data.table)
 library(scales)
-#S2019_jan <- 
-#  read_csv("OD2019/glasgow_20190101_20190630_ride_2019_1_total.csv") %>% 
-#  mutate(month = "2019-01-01")
-
-#S2019_feb <- 
-#  read_csv("OD2019/glasgow_20190101_20190630_ride_2019_2_total.csv") %>% 
-#  mutate(month = "2019-02-01")
-
 
 # Batch Import with the data.table package
 files <-list.files(path="OD", pattern="^glasgow_2019", full.names=TRUE)
@@ -20,9 +12,7 @@ S2016 <- fread("OD/glasgow_2016_ride_od_rollup_month_total.csv")
 S2017 <- fread("OD/glasgow_2017_ride_od_rollup_month_total.csv")
 S2018 <- fread("OD/glasgow_2018_ride_od_rollup_month_total.csv")
 
-
-
-# We do summarise the work
+# Summarise the work
 S2019 %>% 
   as_tibble %>% 
   mutate(month = str_sub(month, 32,38),
@@ -62,10 +52,6 @@ S2015 %>%
   select(origin, destination, month, athcnt, actcnt, cmtcnt) %>% 
   group_by(origin, destination, month) %>% 
   summarise_all(.funs = "sum") -> S2015df
-
-#
-#bind_rows(S2015df, S2016df, S2017df, S2018df, S2019df) %>% 
-#  write_csv("strava_year_bind.csv")
 
 # Plot
 bind_rows(S2015df, S2016df, S2017df, S2018df, S2019df) %>% 
