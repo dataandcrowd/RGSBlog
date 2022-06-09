@@ -1,12 +1,14 @@
-mapboxAccessToken <- 'pk.eyJ1IjoiaHNoaW4xNyIsImEiOiJja2hoaTYxbnYwbmxmMnlvOW0xY2s2emYxIn0.ccMG4CeAL-kHoTRo45LvQg'
-# https://statistics.ukdataservice.ac.uk/dataset/2011-census-geography-boundaries-lower-layer-super-output-areas-and-data-zones
+mapboxAccessToken <- 'get your own mapbox tocken'
+
 library(tidyverse)
 library(flowmapblue)
 library(googlesheets4)
 library(data.table)
 library(sf)
 
-##
+##########
+##-2015-##
+##########
 longlat2015 <- 
   read_csv("GIS/longlat_od2015.csv") %>% 
   rename(lon = X, lat = Y, id = ID) 
@@ -34,7 +36,9 @@ od_rollup_2015 %>%
 flowmapblue(lg, fg, mapboxAccessToken, clustering=TRUE, darkMode=TRUE, animation=F)
 
 
-############################
+##########
+##-2017-##
+##########
 
 longlat2017 <- 
   read_csv("GIS/longlat_od2017.csv") %>% 
@@ -66,7 +70,9 @@ flowmapblue(lg17, fg17, mapboxAccessToken, clustering=TRUE, darkMode=TRUE, anima
 
 
 
-#####################
+##########
+##-2019-##
+##########
 longlat2019 <- 
   read_csv("GIS/longlat_od2019.csv") %>% 
   rename(lon = X, lat = Y, id = ID) 
@@ -82,7 +88,6 @@ setDT(longlat2019_edge)
 
 longlat2019_edge[longlat2019,on=.(id=id),roll="nearest"] -> lg19
 
-####
 # Batch Import with the data.table package
 files <-list.files(path="OD", pattern="^glasgow_2019", full.names=TRUE)
 od_rollup_2019 <- rbindlist(lapply(files, fread), idcol = "month")
@@ -97,6 +102,3 @@ od_rollup_2019 %>%
   summarise(count = sum(count)) -> fg19
 
 flowmapblue(lg19, fg19, mapboxAccessToken, clustering=TRUE, darkMode=TRUE, animation=F)
-
-
-
